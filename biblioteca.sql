@@ -259,4 +259,6 @@ SELECT * FROM  autor WHERE fecha_nacimiento > 1970;
 
 -- c. ¿Cuál es el libro  más solicitado?
 
+SELECT l.titulo, count(*) AS n_solicitudes FROM prestamo AS p INNER JOIN libro AS l ON p.id_libro = l.id_libro GROUP BY l.titulo  ORDER BY n_solicitudes DESC LIMIT 3;
+
 -- d. Si se cobrara una multa de $100 por cada día de atraso, mostrar cuánto debería pagar cada usuario que entregue el préstamo después de 7 días.
