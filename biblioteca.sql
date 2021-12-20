@@ -1,3 +1,5 @@
+-- 1. Crear el modelo en una base de datos llamada biblioteca, considerando las tablas y sus atributos
+
 CREATE TABLE libro(
 	id_libro SERIAL,
 	isbn VARCHAR(15)NOT NULL,
@@ -44,6 +46,10 @@ CREATE TABLE prestamo(
 	FOREIGN KEY(rut) REFERENCES socio(rut)
 );
 
+-- 2. Se deben insertar los registros de las tablas correspondientes
+
+-- Tabla socio
+
 INSERT INTO socio(rut, nombre, apellido, direccion, telefono) VALUES(
 	'1111111-1',
 	'JUAN',
@@ -84,11 +90,7 @@ INSERT INTO socio(rut, nombre, apellido, direccion, telefono) VALUES(
 	955555555
 );
 
-INSERT INTO libro(isbn, titulo, n_paginas) VALUES(
-	'111-1111111-111',
-	'CUENTOS DE TERROR',
-	344
-);
+--Tabla libro
 
 INSERT INTO libro(isbn, titulo, n_paginas) VALUES(
 	'111-1111111-111',
@@ -113,6 +115,8 @@ INSERT INTO libro(isbn, titulo, n_paginas) VALUES(
 	'MANUAL DE MECÁNICA',
 	298
 );
+
+--Tabla autor
 
 INSERT INTO autor(cod_autor, nombre, apellido, fecha_nacimiento, fecha_muerte, tipo) VALUES(
 	3,
@@ -159,6 +163,8 @@ INSERT INTO autor(cod_autor, nombre, apellido, fecha_nacimiento, fecha_muerte, t
 	'PRINCIPAL'
 );
 
+-- Tabla prestamo
+
 INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real_dev) VALUES(
 	1,
 	'1111111-1',
@@ -168,7 +174,7 @@ INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real
 );
 
 INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real_dev) VALUES(
-	3,
+	2,
 	'5555555-5',
 	'20-01-2020',
 	'27-01-2020',
@@ -176,7 +182,7 @@ INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real
 );
 
 INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real_dev) VALUES(
-	4,
+	3,
 	'3333333-3',
 	'22-01-2020',
 	'29-01-2020',
@@ -184,7 +190,7 @@ INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real
 );
 
 INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real_dev) VALUES(
-	5,
+	4,
 	'4444444-4',
 	'23-01-2020',
 	'30-01-2020',
@@ -200,7 +206,7 @@ INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real
 );
 
 INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real_dev) VALUES(
-	4,
+	3,
 	'1111111-1',
 	'31-01-2020',
 	'07-02-2020',
@@ -208,12 +214,14 @@ INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real
 );
 
 INSERT INTO prestamo(id_libro, rut, fecha_inicio, fecha_esperada_dev, fecha_real_dev) VALUES(
-	3,
+	2,
 	'3333333-3',
 	'31-01-2020',
 	'07-02-2020',
 	'12-02-2020'
 );
+
+-- Tabla autorlibro
 
 INSERT INTO autorlibro(id_libro, cod_autor) VALUES(
 	1,
@@ -226,16 +234,29 @@ INSERT INTO autorlibro(id_libro, cod_autor) VALUES(
 );
 
 INSERT INTO autorlibro(id_libro, cod_autor) VALUES(
-	3,
+	2,
 	1
 );
 
 INSERT INTO autorlibro(id_libro, cod_autor) VALUES(
-	4,
+	3,
 	2
 );
 
 INSERT INTO autorlibro(id_libro, cod_autor) VALUES(
-	5,
+	4,
 	5
 );
+
+-- 3. Realizar  las siguientes consultas:
+-- a. Mostrar todos los libros que posean menos de 300 páginas 
+
+SELECT * FROM libro WHERE n_paginas < 300;
+
+-- b. Mostrar todos los autores que hayan  nacido después del 01-01-1970
+
+SELECT * FROM  autor WHERE fecha_nacimiento > 1970;
+
+-- c. ¿Cuál es el libro  más solicitado?
+
+-- d. Si se cobrara una multa de $100 por cada día de atraso, mostrar cuánto debería pagar cada usuario que entregue el préstamo después de 7 días.
